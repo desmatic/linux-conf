@@ -1,0 +1,29 @@
+#passwd, group, shadow
+apt-get install ldap-utils libpam-ldapd
+
+cat > /usr/share/pam-configs/mkhomedir <<EOF
+Name: Create home directory during login
+Default: yes
+Priority: 900
+Session-Type: Additional
+Session:
+  required	pam_mkhomedir.so umask=0022 skel=/etc/skel
+EOF
+pam-auth-update
+
+cat >> /etc/ldap/ldap.conf <<EOF
+BASE    dc=localdomain
+URI     ldap://192.168.168.1
+EOF
+
+cat > /etc/ssh/openssh-lpk.sh <<EOF
+#!/bin/sh
+ldapsearch -x -u -LLL -o ldif-wrap=no '(&(objectClass=posixAccount)(uid='"\$1"'))' 'sshPublicKey' | sed -n 's/^[ \t]*sshPublicKey:[ \t]*\(.*\)/\1/p'
+EOF
+chmod 755 /etc/ssh/openssh-lpk.sh
+
+cat >> /etc/ssh/sshd_config <<EOF
+#ldap public keys
+AuthorizedKeysCommand /etc/ssh/openssh-lpk.sh
+AuthorizedKeysCommandUser nobody
+EOF
