@@ -1,0 +1,117 @@
+# extended LDIF
+#
+# LDAPv3
+# base <ou=dhcp,dc=localdomain> with scope subtree
+# filter: (objectclass=*)
+# requesting: ALL
+#
+
+# dhcp, localdomain
+dn: ou=dhcp,dc=localdomain
+objectClass: organizationalUnit
+objectClass: top
+ou: dhcp
+
+# server, dhcp, localdomain
+dn: cn=server,ou=dhcp,dc=localdomain
+cn: server
+objectClass: top
+objectClass: dhcpServer
+dhcpServiceDN: cn=config,ou=dhcp,dc=localdomain
+
+# config, dhcp, localdomain
+dn: cn=config,ou=dhcp,dc=localdomain
+cn: config
+objectClass: top
+objectClass: dhcpService
+dhcpPrimaryDN: cn=server,ou=dhcp,dc=localdomain
+dhcpOption: domain-name-servers 192.168.168.1
+dhcpOption: domain-name "localdomain"
+dhcpStatements: ddns-update-style none
+dhcpStatements: get-lease-hostnames true
+dhcpStatements: use-host-decl-names true
+dhcpStatements: default-lease-time 600
+dhcpStatements: max-lease-time 7200
+dhcpStatements: log-facility local7
+dhcpStatements: authoritative
+
+# 192.168.168.0, config, dhcp, localdomain
+dn: cn=192.168.168.0,cn=config,ou=dhcp,dc=localdomain
+objectClass: top
+objectClass: dhcpSubnet
+objectClass: dhcpOptions
+dhcpNetMask: 24
+dhcpRange: 192.168.168.192 192.168.168.254
+cn: 192.168.168.0
+dhcpOption: routers 192.168.168.1
+
+# jessie01, config, dhcp, localdomain
+dn: cn=jessie01,cn=config,ou=dhcp,dc=localdomain
+cn: jessie01
+objectClass: top
+objectClass: dhcpHost
+dhcpStatements: fixed-address 192.168.168.101
+dhcpHWAddress: ethernet 52:54:00:16:1b:1c
+
+# jessie02, config, dhcp, localdomain
+dn: cn=jessie02,cn=config,ou=dhcp,dc=localdomain
+cn: jessie02
+objectClass: top
+objectClass: dhcpHost
+dhcpStatements: fixed-address 192.168.168.102
+dhcpHWAddress: ethernet 52:54:00:a4:1d:f3
+
+# jessie03, config, dhcp, localdomain
+dn: cn=jessie03,cn=config,ou=dhcp,dc=localdomain
+cn: jessie03
+objectClass: top
+objectClass: dhcpHost
+dhcpStatements: fixed-address 192.168.168.103
+dhcpHWAddress: ethernet 52:54:00:af:2e:56
+
+# jessie04, config, dhcp, localdomain
+dn: cn=jessie04,cn=config,ou=dhcp,dc=localdomain
+cn: jessie04
+objectClass: top
+objectClass: dhcpHost
+dhcpHWAddress: ethernet 52:54:00:cb:4e:3d
+dhcpStatements: fixed-address 192.168.168.104
+
+# jessie05, config, dhcp, localdomain
+dn: cn=jessie05,cn=config,ou=dhcp,dc=localdomain
+cn: jessie05
+objectClass: top
+objectClass: dhcpHost
+dhcpHWAddress: ethernet 52:54:00:c1:e9:0e
+dhcpStatements: fixed-address 192.168.168.105
+
+# woody, config, dhcp, localdomain
+dn: cn=woody,cn=config,ou=dhcp,dc=localdomain
+cn: woody
+dhcpStatements: fixed-address 192.168.168.106
+objectClass: dhcpHost
+objectClass: top
+dhcpHWAddress: ethernet 52:54:00:76:99:28
+
+# ham, config, dhcp, localdomain
+dn: cn=ham,cn=config,ou=dhcp,dc=localdomain
+cn: ham
+dhcpHWAddress: ethernet 52:54:00:76:99:28
+dhcpStatements: fixed-address 192.168.168.107
+objectClass: dhcpHost
+objectClass: top
+
+# buzz, config, dhcp, localdomain
+dn: cn=buzz,cn=config,ou=dhcp,dc=localdomain
+cn: buzz
+objectClass: dhcpHost
+objectClass: top
+dhcpHWAddress: ethernet 52:54:00:54:1d:94
+dhcpStatements: fixed-address 192.168.168.108
+
+# search result
+search: 2
+result: 0 Success
+
+# numResponses: 13
+# numEntries: 12
