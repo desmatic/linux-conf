@@ -1,0 +1,22 @@
+; Zone file for localdomain
+$TTL	1h
+@ IN SOA ns1.localdomain. admin.localdomain. (
+	1 ; serial, todays date+todays
+	3h ; refresh, seconds
+	1h ; retry, seconds
+	1h ; expire, seconds
+	1h ) ; minimum, seconds
+
+; DEFINE NS RECORDS
+			IN	NS	ns1.localdomain.
+
+; A RECORDS
+ns1			IN	A	192.168.168.1 
+jessie01		IN	A	192.168.168.101 
+jessie02		IN	A	192.168.168.102
+jessie03		IN	A	192.168.168.103 
+jessie04		IN	A	192.168.168.104 
+jessie05		IN	A	192.168.168.105 
+woody			IN	A	192.168.168.106 
+ham			IN	A	192.168.168.107 
+buzz			IN	A	192.168.168.108

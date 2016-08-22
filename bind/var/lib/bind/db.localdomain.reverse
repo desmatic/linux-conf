@@ -1,0 +1,21 @@
+; Zone file for localdomain
+@ IN SOA ns1.localdomain. admin.localdomain. (
+	1 ; serial, todays date+todays
+	3h ; refresh, seconds
+	1h ; retry, seconds
+	1h ; expire, seconds
+	1h ) ; minimum, seconds
+
+; DEFINE NS RECORDS
+@	IN	NS	ns1.localdomain.
+
+; A RECORDS
+1	IN	PTR	ns1.localdomain.
+101	IN	PTR	jessie01.localdomain.
+102	IN	PTR	jessie02.localdomain.
+103	IN	PTR	jessie03.localdomain.
+104	IN	PTR	jessie04.localdomain.
+105	IN	PTR	jessie05.localdomain.
+106	IN	PTR	woody.localdomain.
+107	IN	PTR	ham.localdomain.
+108	IN	PTR	buzz.localdomain.
