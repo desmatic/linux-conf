@@ -27,3 +27,9 @@ cat >> /etc/ssh/sshd_config <<EOF
 AuthorizedKeysCommand /etc/ssh/openssh-lpk.sh
 AuthorizedKeysCommandUser nobody
 EOF
+
+apt-get install sudoer
+cat >> /etc/sudoers.d/sysops <<EOF
+%sysops ALL=(ALL) NOPASSWD:ALL
+EOF
+chmod 660 /etc/sudoers.d/sysops
